@@ -1,0 +1,23 @@
+{
+  "name": "write-file-to-socket",
+  "version": "0.1.0",
+  "description": "write a file to, read a file from---a socket",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/test.js | tap-spec"
+  },
+  "keywords": [
+    "stream",
+    "file",
+    "share",
+    "p2p"
+  ],
+  "author": "Jared Fowler (@jafow)",
+  "license": "MIT",
+  "dependencies": {
+    "through2": "^2.0.3"
+  }
+}
