@@ -31,9 +31,9 @@ WFTS.prototype.serve = function serve () {
 }
 
 WFTS.prototype.pull = function pull () {
-  const fsw = fs.createWriteStream(this.file, {flags: 'w', defaultEncoding: 'utf8', autoClose: true})
+  const fsw = fs.createWriteStream(this.file, 'utf8')
 
-  const socket = net.connect(this.PORT, HOST, () => {
+  const socket = net.connect(this.PORT, this.host, () => {
     socket.pipe(fsw).on('finished', () => { console.log('hooo')})
   })
 
