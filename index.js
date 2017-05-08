@@ -5,10 +5,15 @@ const path = require('path')
 module.exports = WFTS
 
 function WFTS (options) {
+  if (typeof options === 'function') {
+    cb = options
+    options = {}
+  }
   this.PORT = options.port || 4000
   this.host = options.host || 'localhost'
   this.file = toPath(options.file)
   this.cmd = options.cmd
+  // this.cb = cb || noop
 }
 
 WFTS.prototype.serve = function serve () {
@@ -30,11 +35,12 @@ WFTS.prototype.serve = function serve () {
   server.listen(this.PORT)
 }
 
-WFTS.prototype.pull = function pull () {
+WFTS.prototype.pull = function pull (cb) {
+  if (!cb) cb = noop
   const fsw = fs.createWriteStream(this.file, 'utf8')
 
   const socket = net.connect(this.PORT, this.host, () => {
-    socket.pipe(fsw).on('finished', () => { console.log('hooo')})
+    socket.pipe(fsw).on('finish', cb)
   })
 
   socket.on('end', () => {
@@ -45,6 +51,7 @@ WFTS.prototype.pull = function pull () {
 
   socket.on('error', (err) => {
     console.error(err)
+    cb(err)
     process.exit(1)
   })
 }
@@ -59,3 +66,5 @@ function close () {
   process.exit(0)
 }
 
+function noop () {
+}
