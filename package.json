@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node test/test.js | tap-spec"
+    "test": "node test/test.js | tap-spec",
+    "lint": "./node_modules/standard/bin/cmd.js *.js"
   },
   "keywords": [
     "stream",
@@ -17,7 +18,10 @@
   ],
   "author": "Jared Fowler (@jafow)",
   "license": "MIT",
-  "dependencies": {
-    "through2": "^2.0.3"
+  "devDependencies": {
+    "random-access-memory": "^2.4.0",
+    "standard": "^10.0.2",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
   }
 }
