@@ -4,24 +4,21 @@ const fs = require('fs')
 const wfts = require('../')
 
 test('sends file', function (t) {
-  t.plan(2)
-  var file = ram(Buffer.from('hello world'))
+  t.plan(4)
   var server = new wfts({port: 3000, file: 'test/hello.txt'})
   var client = new wfts({port: 3000, file: 'test/world.txt'})
   server.serve()
-  client.pull()
+  client.pull(pullCallback)
 
-  fs.lstat('./test/world.txt', function (err, stat) {
-    t.equal(null, err)
-    t.ok(stat.isFile())
-  })
+  function pullCallback () {
+    fs.lstat('test/world.txt', function (err, stat) {
+      t.equal(err, null)
+        t.ok(stat.isFile(), 'makes a file')
+    })
 
-})
-
-test('file is same', function (t) {
-  fs.readFile('./test/world.txt', function (err, d) {
-    t.equal(null, err)
-    t.deepEqual(Buffer.from('hello world'), d)
-    t.end()
-  })
+    fs.readFile('./test/world.txt', function (err, data) {
+      t.equal(err, null)
+      t.same(data.toString(), 'hello world\n', 'target data matches source')
+    })
+  }
 })
