@@ -13,25 +13,23 @@ function WFTS (options) {
   this.host = options.host || 'localhost'
   this.file = toPath(options.file)
   this.cmd = options.cmd
-  // this.cb = cb || noop
 }
 
 WFTS.prototype.serve = function serve () {
   const server = net.createServer((socket) => {
-    socket.on('end', close)
     socket.on('error', (err) => {
-      throw err
+      console.error(err)
+      process.exit(1)
+    })
+
+    socket.on('end', () => {
+      server.emit('close')
+      server.close()
     })
 
     fs.createReadStream(this.file).pipe(socket)
   })
 
-  server.on('error', (err) => {
-    console.error(err)
-    process.exit(1)
-  })
-
-  server.on('close', close)
   server.listen(this.PORT)
 }
 
@@ -44,9 +42,8 @@ WFTS.prototype.pull = function pull (cb) {
   })
 
   socket.on('end', () => {
-    console.log('transfer complete')
     socket.destroy()
-    socket.end()
+    socket.unref().end()
   })
 
   socket.on('error', (err) => {
@@ -59,11 +56,6 @@ WFTS.prototype.pull = function pull (cb) {
 function toPath(p) {
   if (!/\/d+/.test(p)) return path.join(__dirname, p)
   return p
-}
-
-function close () {
-  console.log('client disconnected')
-  process.exit(0)
 }
 
 function noop () {
