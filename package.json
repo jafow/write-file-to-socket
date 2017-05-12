@@ -23,5 +23,8 @@
     "standard": "^10.0.2",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.3"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0"
   }
 }
