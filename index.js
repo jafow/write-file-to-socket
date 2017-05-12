@@ -12,7 +12,6 @@ function WFTS (options) {
   this.PORT = options.port || 4000
   this.host = options.host || 'localhost'
   this.file = toPath(options.file)
-  this.cmd = options.cmd
 }
 
 WFTS.prototype.serve = function serve () {
@@ -54,6 +53,7 @@ WFTS.prototype.pull = function pull (cb) {
 }
 
 function toPath(p) {
+  if (!p) return 'wfts-file'
   if (!/\/d+/.test(p)) return path.join(__dirname, p)
   return p
 }
