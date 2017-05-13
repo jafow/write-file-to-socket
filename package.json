@@ -1,10 +1,13 @@
 {
   "name": "write-file-to-socket",
   "version": "0.1.0",
-  "description": "write a file to, read a file from---a socket",
+  "description": "write a file to, read a file from: a socket",
   "main": "index.js",
   "directories": {
     "test": "test"
+  },
+  "bin": {
+    "wfts": "bin/cli.js"
   },
   "scripts": {
     "test": "node test/test.js | tap-spec",
