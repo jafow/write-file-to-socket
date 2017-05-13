@@ -52,7 +52,8 @@ WFTS.prototype.pull = function pull (cb) {
 
 function toPath (p) {
   if (!p) return 'wfts-file'
-  if (!/\/d+/.test(p)) return path.join(__dirname, p)
+  if (!/\/+/.test(p)) return path.join(__dirname, p)
+  if (!path.isAbsolute(p)) throw new Error('Use an absolute file path')
   return p
 }
 
