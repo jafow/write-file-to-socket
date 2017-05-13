@@ -5,6 +5,7 @@ const path = require('path')
 module.exports = WFTS
 
 function WFTS (options) {
+  if (!(this instanceof WFTS)) return new WFTS(options)
   if (!options) options = {}
   this.PORT = options.port || 4000
   this.host = options.host || 'localhost'
