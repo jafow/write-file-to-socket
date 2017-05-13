@@ -5,10 +5,7 @@ const path = require('path')
 module.exports = WFTS
 
 function WFTS (options) {
-  if (typeof options === 'function') {
-    cb = options
-    options = {}
-  }
+  if (!options) options = {}
   this.PORT = options.port || 4000
   this.host = options.host || 'localhost'
   this.file = toPath(options.file)
@@ -52,7 +49,7 @@ WFTS.prototype.pull = function pull (cb) {
   })
 }
 
-function toPath(p) {
+function toPath (p) {
   if (!p) return 'wfts-file'
   if (!/\/d+/.test(p)) return path.join(__dirname, p)
   return p
