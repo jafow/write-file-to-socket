@@ -49,7 +49,7 @@ module. :raised_hands:
 ## methods
 #### var wfts = require('write-file-to-socket')(opts)
 options are `port`, `host`, `file`. Only required is `file` for serving.
-Can take an absolute path but defaults to the current working directory.
+Defaults to take file from the current working directory, but accept a path too.
 ``` js
 var opts = { port: 4000, file: '/path/to/a/file.txt'}
 wfts.serve()
@@ -66,5 +66,23 @@ Provides an optional callback that is run after the file transfer is complete.
 ``` js
 wfts.pull(function () { console.log('just wrote a file!') })
 ```
+
+## CLI
+```sh
+$ wfts --help
+usage: wfts <command> [file] [-p PORT] [-h host] [--help]
+
+example:
+
+Serve a file on default host and port (localhost:4000)
+
+    $ wfts serve my-file.txt
+
+Receive a file on host 10.1.2.3 and port 3333 and save it to the
+current working directory as "my-received-file.txt".
+
+    $ wfts pull my-received-file.txt -h 10.1.2.3 -p 3333
+```
+
 # License
 MIT
