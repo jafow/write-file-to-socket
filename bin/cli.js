@@ -14,7 +14,8 @@ if (argv.help) {
   console.log('example: \n')
   console.log('Serve a file on default host and port (localhost:4000)\n')
   console.log('\t$ wfts serve my-file.txt\n')
-  console.log('Receive a file on host 10.1.2.3 and port 3333\n')
+  console.log('Receive a file on host 10.1.2.3 and port 3333 and save it to the' +
+      ' current working directory as "my-received-file.txt"\n')
   console.log('\t$ wfts pull my-received-file.txt -h 10.1.2.3 -p 3333\n')
   process.exit(0)
 }
