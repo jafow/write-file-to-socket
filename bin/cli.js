@@ -16,5 +16,6 @@ if (argv.help) {
   console.log('\t$ wfts serve my-file.txt\n')
   console.log('Receive a file on host 10.1.2.3 and port 3333\n')
   console.log('\t$ wfts pull my-received-file.txt -h 10.1.2.3 -p 3333\n')
+  process.exit(0)
 }
 new WFTS(options)[command]()
