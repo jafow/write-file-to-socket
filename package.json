@@ -1,6 +1,6 @@
 {
   "name": "write-file-to-socket",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "write a file to, read a file from: a socket",
   "main": "index.js",
   "directories": {
