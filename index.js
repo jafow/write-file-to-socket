@@ -52,7 +52,7 @@ WFTS.prototype.pull = function pull (cb) {
 
 function toPath (p) {
   if (!p) return 'wfts-file'
-  if (!/\/+/.test(p)) return path.join(__dirname, p)
+  if (!/\/+/.test(p)) return path.join(process.cwd(), p)
   return p
 }
 
